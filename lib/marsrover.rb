@@ -1,6 +1,6 @@
 class MarsRover
   DEFAULT_POSITION = [0,0]
-  DEFAULT_DIRECTION = :north
+  DEFAULT_DIRECTION = 0
   COMPASS_DIRECTIONS = [:north, :west, :south, :east]
 
   def initialize
