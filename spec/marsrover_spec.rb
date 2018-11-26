@@ -3,6 +3,8 @@ require './lib/marsrover.rb'
 describe 'marsrover' do
 # subject(:marsrover) { described_class.new }
   ORIGIN = [0,0]
+  DIRECTION = :north
+
 
   it 'starts at original position' do
     mr = MarsRover.new
@@ -21,6 +23,11 @@ describe 'marsrover' do
     mr = MarsRover.new
     mr.receive_commands(:b)
     expect(mr.position).to eq(ONE_STEP_BACKWARD)
+  end
+
+  it "knows which direction it is facing" do
+    mr = MarsRover.new
+    expect(mr.direction).to eq(DIRECTION)
   end
 
 end
