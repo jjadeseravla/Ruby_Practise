@@ -20,8 +20,6 @@ class MarsRover
     commands.each { |theCommand| run_command(theCommand) }
   end
 
-  private
-
   def run_command(command)
     # actions = {
     #   :f => lambda { move_forward },
@@ -36,12 +34,14 @@ class MarsRover
     turn_right if command == :r
   end
 
+  private
+
   def move_forward
     @position = [0,1]
   end
 
   def move_backward
-    @posotion = [0,-1]
+    @position = [0,-1]
   end
 
   def turn_left

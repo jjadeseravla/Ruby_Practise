@@ -17,7 +17,7 @@ class NavigationInstrument
 
   def turn_left
     turn(LEFT)
-    # % (COMPASS_DIRECTIONS.size)
+
   end
 
   def turn_right
@@ -28,6 +28,7 @@ class NavigationInstrument
 
   def turn(side)
     @direction += side
+    @direction %= (COMPASS_DIRECTIONS.size)
   end
 
 end
