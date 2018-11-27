@@ -1,33 +1,55 @@
+require_relative 'navigationinstrument'
+
 class MarsRover
   DEFAULT_POSITION = [0,0]
-  DEFAULT_DIRECTION = 0
-  COMPASS_DIRECTIONS = [:north, :west, :south, :east]
 
   def initialize
     @position = DEFAULT_POSITION
-    @direction = DEFAULT_DIRECTION
+    @navigation_instrument = NavigationInstrument.new
   end
 
-  def position
+  def getPosition
     @position
   end
 
-  def direction
-    COMPASS_DIRECTIONS[@direction]
+  def getDirection
+    @navigation_instrument.where_are_you_heading?
   end
 
-  def receive_commands(*commands)
-    @position = [0,1]
-    @position = [0,-1] if commands.first == :b
-    commands.each do |theCommand|
-      turn_left if theCommand == :l
-    end
+  def execute_commands(*commands)
+    commands.each { |theCommand| run_command(theCommand) }
   end
 
   private
 
+  def run_command(command)
+    # actions = {
+    #   :f => lambda { move_forward },
+    #   :b => lambda { move_backward },
+    #   :l => lambda { turn_left },
+    #   :r => lambda { turn_right }
+    # }
+    # actions[command].call
+    move_forward if command == :f
+    move_backward if command == :b
+    turn_left if command == :l
+    turn_right if command == :r
+  end
+
+  def move_forward
+    @position = [0,1]
+  end
+
+  def move_backward
+    @posotion = [0,-1]
+  end
+
   def turn_left
-    @direction += 1 % (COMPASS_DIRECTIONS.size)
+    @navigation_instrument.turn_left
+  end
+
+  def turn_right
+    @navigation_instrument.turn_right
   end
 
 end
